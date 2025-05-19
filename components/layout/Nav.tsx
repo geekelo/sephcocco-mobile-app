@@ -105,15 +105,21 @@ export function NavBar() {
           >
             Payment History
           </ThemedText>
-          <ThemedText
-            type="default"
+           <Link
+            href="/message"
             style={[
               styles.sidebarText,
               { color: theme.text, borderBottomColor: theme.border },
             ]}
+            asChild
+          >
+          <ThemedText
+            type="default"
+          
           >
             Messages
           </ThemedText>
+          </Link>
 
           {/* Store Dropdown */}
           <View

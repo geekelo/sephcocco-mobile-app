@@ -10,7 +10,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
-import { ThemedView } from "@/components/ThemedView";import { ThemedText } from "@/components/ThemedText";
+import { ThemedView } from "@/components/ThemedView";
+import { ThemedText } from "@/components/ThemedText";
 import CustomButton from "../ui/CustomButton";
 import { Colors } from "@/constants/Colors";
 import PaymentModal from "../modal/payment";
@@ -27,7 +28,7 @@ export const MakePaymentScreen = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowModal(true);
-    }, 6000); // 1 min
+    }, 600);
     return () => clearTimeout(timer);
   }, []);
 
