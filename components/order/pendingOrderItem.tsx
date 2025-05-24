@@ -55,62 +55,63 @@ export const PendingOrderItem: React.FC<PendingOrderItemProps> = ({
         />
       </TouchableOpacity>
 
-      <Image source={{ uri: order.image }} style={styles.image} />
+    // ...unchanged imports and component code...
 
-      <View style={styles.content}>
-        <View style={styles.info}>
-          <Text style={styles.name}>{order.name}</Text>
-          <Text style={styles.statusText}>Status: {order.status}</Text>
-          <OrderStatusBadge status={order.status} />
-        </View>
+<Image source={{ uri: order.image }} style={styles.image} />
 
-        <View style={styles.details}>
-          <View style={styles.quantityContainer}>
-            <Text style={styles.quantityLabel}>Quantity:</Text>
-            <View style={styles.quantityControls}>
-              <TouchableOpacity
-                style={styles.qtyBtn}
-                onPress={(e) => {
-                  e.stopPropagation?.();
-                  onDecrease();
-                }}
-              >
-                <Feather name="minus" size={16} />
-              </TouchableOpacity>
+<View style={styles.content}>
+  <View style={styles.info}>
+    <Text style={styles.name} numberOfLines={1}>{order.name}</Text>
+    <Text style={styles.statusText}>Status: {order.status}</Text>
+    <OrderStatusBadge status={order.status} />
+  </View>
 
-              <Text style={styles.quantityValue}>{quantity}</Text>
+  <View style={styles.details}>
+    <View style={styles.quantityContainer}>
+      <Text style={styles.quantityLabel}>Qty:</Text>
+      <View style={styles.quantityControls}>
+        <TouchableOpacity
+          style={styles.qtyBtn}
+          onPress={(e) => {
+            e.stopPropagation?.();
+            onDecrease();
+          }}
+        >
+          <Feather name="minus" size={16} />
+        </TouchableOpacity>
 
-              <TouchableOpacity
-                style={styles.qtyBtn}
-                onPress={(e) => {
-                  e.stopPropagation?.();
-                  onIncrease();
-                }}
-              >
-                <Feather name="plus" size={16} />
-              </TouchableOpacity>
-            </View>
-          </View>
+        <Text style={styles.quantityValue}>{quantity}</Text>
 
-          <View style={styles.priceContainer}>
-            <View style={styles.priceRow}>
-              <Text style={styles.priceLabel}>Unit Price:</Text>
-              <Text style={styles.priceValue}>${order.price.toFixed(2)}</Text>
-            </View>
-            <View style={[styles.priceRow, styles.totalRow]}>
-              <Text style={styles.priceLabel}>Total:</Text>
-              <Text style={[styles.priceValue, styles.totalValue]}>
-                ${totalPrice.toFixed(2)}
-              </Text>
-            </View>
-          </View>
-        </View>
+        <TouchableOpacity
+          style={styles.qtyBtn}
+          onPress={(e) => {
+            e.stopPropagation?.();
+            onIncrease();
+          }}
+        >
+          <Feather name="plus" size={16} />
+        </TouchableOpacity>
       </View>
+    </View>
+
+    <View style={styles.priceContainer}>
+      <View style={styles.priceRow}>
+        <Text style={styles.priceLabel}>Unit:</Text>
+        <Text style={styles.priceValue}>${order.price.toFixed(2)}</Text>
+      </View>
+      <View style={[styles.priceRow, styles.totalRow]}>
+        <Text style={styles.priceLabel}>Total:</Text>
+        <Text style={[styles.priceValue, styles.totalValue]}>
+          ${totalPrice.toFixed(2)}
+        </Text>
+      </View>
+    </View>
+  </View>
+</View>
+
     </TouchableOpacity>
   );
-};
-
-const styles = StyleSheet.create({
+};const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     borderWidth: 1,
@@ -118,7 +119,9 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     padding: 12,
     marginBottom: 12,
-    alignItems: 'center',
+    alignItems: 'flex-start',
+    backgroundColor: '#fff',
+    flexWrap: 'wrap',
   },
   selected: {
     borderColor: '#32CD32',
@@ -131,11 +134,11 @@ const styles = StyleSheet.create({
     width: 64,
     height: 64,
     borderRadius: 8,
-    marginLeft: 12,
-    marginRight: 12,
+    marginHorizontal: 12,
   },
   content: {
     flex: 1,
+    minWidth: 0,
   },
   info: {
     marginBottom: 8,
@@ -144,6 +147,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: '600',
     color: '#000',
+    flexShrink: 1,
   },
   statusText: {
     fontSize: 12,
@@ -152,11 +156,15 @@ const styles = StyleSheet.create({
   details: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    flexWrap: 'wrap',
   },
   quantityContainer: {
     flexDirection: 'row',
     alignItems: 'center',
+    flex: 1,
+    marginRight: 10,
+    minWidth: 120,
+    marginTop: 4,
   },
   quantityLabel: {
     marginRight: 8,
@@ -181,9 +189,13 @@ const styles = StyleSheet.create({
   },
   priceContainer: {
     alignItems: 'flex-end',
+    flex: 1,
+    minWidth: 120,
+    marginTop: 4,
   },
   priceRow: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
   },
   priceLabel: {
     fontSize: 12,
